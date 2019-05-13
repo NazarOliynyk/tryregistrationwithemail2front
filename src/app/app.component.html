@@ -83,12 +83,12 @@
 
 <div *ngIf="showUsers" class="container">
   <h2>Users: </h2>
-  <ul>
-    <li *ngFor="let u of users" class="row">
-      <p class="col" style="color: red">{{u.username}}</p><br>
-      <p class="col" style="color: blue">{{u.email}}</p><br>
+  <ul class="list-group">
+    <li *ngFor="let u of users" class="list-group-item">
+      <div  style="color: red"> {{u.username + ', ' + u.email}} </div>
       <button class="btn btn-outline-danger" (click)="deleteUser(u)">Delete</button>
     </li>
   </ul>
 </div>
 <h5>{{responseOnDelete}}</h5>
+
