@@ -1,0 +1,94 @@
+
+<div class="container">
+  <div class="btn-group-vertical">
+    <button (click)="signIn()" class="btn btn-primary">Sign in</button><br>
+    <button (click)="logIn()" class="btn btn-primary">Log in</button><br>
+    <button (click)="logOut()" class="btn btn-primary">Log out</button><br>
+    <button (click)="getUsers()" class="btn btn-primary">Get users List</button>
+  </div>
+</div>
+
+<div class="container">
+<form *ngIf="showRegisterForm" #registerForm="ngForm">
+
+  <label>Login:<br>
+    <input  class="form-control"
+            [(ngModel)]="user.username" type="text"
+            [ngStyle]="{border: usernameRef.invalid && usernameRef.dirty?
+              '3px solid red': '3px solid green'}"
+            ngModel
+            #usernameRef = 'ngModel'
+            required minlength="4"
+            name="username" placeholder="username" size="10"></label><br>
+
+  <label>Password:<br>
+    <input class="form-control"
+           [(ngModel)]="user.password" type="password"
+           [ngStyle]="{border: passwordRef.invalid && passwordRef.dirty?
+              '3px solid red': '3px solid green'}"
+           ngModel
+           #passwordRef = 'ngModel'
+           required minlength="4"
+           name="password" placeholder="password" size="10"></label><br>
+
+  <label>Email:<br>
+    <input class="form-control"
+           [(ngModel)]="user.email" type="email"
+           [ngStyle]="{border: emailRef.invalid && emailRef.dirty?
+              '3px solid red': '3px solid green'}"
+           ngModel
+           #emailRef = 'ngModel'
+           required email
+           name="email" placeholder="email" size="40"></label><br>
+
+  <button [disabled]="registerForm.invalid"
+          (click)="saveUser(registerForm)" type="button">Sign In</button>
+</form>
+
+</div>
+
+<h3 style="color: blueviolet">{{responseRegistration}}</h3>
+
+<div class="container">
+<form *ngIf="showLoginForm" #loginForm="ngForm">
+
+  <label>Login:<br>
+    <input  class="form-control"
+            [(ngModel)]="userToLogin.username" type="text"
+            [ngStyle]="{border: usernameRef.invalid && usernameRef.dirty?
+              '3px solid red': '3px solid green'}"
+            ngModel
+            #usernameRef = 'ngModel'
+            required minlength="4"
+            name="username" placeholder="username" size="10"></label><br>
+
+  <label>Password:<br>
+    <input class="form-control"
+            [(ngModel)]="userToLogin.password" type="password"
+           [ngStyle]="{border: passwordRef.invalid && passwordRef.dirty?
+              '3px solid red': '3px solid green'}"
+           ngModel
+           #passwordRef = 'ngModel'
+           required minlength="4"
+           name="password" placeholder="password" size="10"></label><br>
+
+
+  <button [disabled]="loginForm.invalid"
+          (click)="logInto(loginForm)" type="button">Log In</button>
+</form>
+
+</div>
+
+<h3 style="color: brown">{{responseLogination}}</h3>
+
+<div *ngIf="showUsers" class="container">
+  <h2>Users: </h2>
+  <ul>
+    <li *ngFor="let u of users" class="row">
+      <p class="col" style="color: red">{{u.username}}</p><br>
+      <p class="col" style="color: blue">{{u.email}}</p><br>
+      <button class="btn btn-outline-danger" (click)="deleteUser(u)">Delete</button>
+    </li>
+  </ul>
+</div>
+<h5>{{responseOnDelete}}</h5>
