@@ -21,6 +21,7 @@ export class AppComponent {
   headersOption: HttpHeaders;
   showUsers = false;
   responseOnDelete = '';
+  showGetUsersButton = true;
 
   constructor(private userService: UserServiceService) {
   }
@@ -63,7 +64,7 @@ export class AppComponent {
 
         localStorage.setItem('_token', token);
         console.log('token: ' + token);
-
+        this.showGetUsersButton = false;
         this.user = JSON.parse(userLogged);
         this.responseLogination = 'Hello: ' + this.user.username;
       },
